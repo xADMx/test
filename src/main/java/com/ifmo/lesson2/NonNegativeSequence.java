@@ -11,6 +11,6 @@ public class NonNegativeSequence {
         do {
             System.out.println(i);
             i -= 5;
-        } while (i > 0);
+        } while (i >= 0);
     }
 }

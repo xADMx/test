@@ -21,6 +21,7 @@ public class UnluckyNumbers {
             do {
                 if (sum % 10 == 4 || sum % 100 == 13) {
                     count++;
+                    break;
                 }
                 sum /= 10;
             } while (sum > 0);
