@@ -9,8 +9,8 @@ public class First20 {
         // TODO implement
         int sum = 1;
         for (int i = 0; i < 20; i++) {
-            sum *= 2;
             System.out.println(sum);
+            sum *= 2;
         }
     }
 }

@@ -21,10 +21,11 @@ public class SymmetricClocks {
                 int rightM = j % 10;
                 if (rightH == leftM & leftH == rightM) {
                     count++;
+                    System.out.println(leftH + "" + rightH +":"+leftM +""+rightM);
                 }
+
             }
         }
-
         return count;
     }
 }

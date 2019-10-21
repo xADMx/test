@@ -12,7 +12,7 @@ public class Fibonacci {
         int second = 1;
         System.out.println(first);
         System.out.println(second);
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
             if (i % 2 == 0) {
                 first += second;
                 System.out.println(first);
