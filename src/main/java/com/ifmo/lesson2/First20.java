@@ -7,7 +7,7 @@ public class First20 {
      */
     public static void main(String[] args) {
         // TODO implement
-        int sum = 1;
+        long sum = 2;
         for (int i = 0; i < 20; i++) {
             System.out.println(sum);
             sum *= 2;
