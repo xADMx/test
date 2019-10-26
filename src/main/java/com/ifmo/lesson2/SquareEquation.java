@@ -9,9 +9,9 @@ public class SquareEquation {
      либо сообщать, что корней нет.
      */
     public static void main(String[] args) {
-        double a = 3;
-        double b = -18;
-        double c = 27;
+        double a = 2;
+        double b = -9;
+        double c = 9;
 
         double[] roots = squareEquationRoots(a, b, c);
 
