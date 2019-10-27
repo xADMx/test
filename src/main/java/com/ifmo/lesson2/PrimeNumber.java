@@ -24,9 +24,9 @@ public class PrimeNumber {
 
     public static boolean isPrime(int n) {
         // TODO implement
-        if ((Math.sqrt(n) < 2) || n == 1) {
+        if ( n < 2) {
             return false;
-        } else {
+        } else if(2 < n) {
             for (int i = 2; i < n; i++) {
                 if (n % i == 0)
                     return false;
