@@ -86,7 +86,7 @@ public class Library {
         // TODO implement
 
         for (int i = 0; i < books.length; i++) {
-            if(books[i].equals(book)) {
+            if(books[i] != null && books[i].equals(book)) {
                 if(books[i].getCountbook() > quantity) {
                     books[i].setCountbook(books[i].getCountbook() - quantity);
                     return quantity;
