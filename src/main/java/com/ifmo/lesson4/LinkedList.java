@@ -54,6 +54,9 @@ public class LinkedList {
     public Object remove(int i) {
         // TODO implement
 
+        if(head == null)
+            return null;
+
         if(i == 0){
             Object res = head.value;
             head = head.next;
