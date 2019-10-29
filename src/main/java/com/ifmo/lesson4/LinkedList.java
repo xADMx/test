@@ -53,7 +53,14 @@ public class LinkedList {
      */
     public Object remove(int i) {
         // TODO implement
-        Item obj = this.find(i - 2);
+
+        if(i == 0){
+            Object res = head.value;
+            head = head.next;
+            return res;
+        }
+
+        Item obj = this.find(i - 1);
 
         if (obj != null) {
             Object res = obj.next.value;
