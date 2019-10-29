@@ -66,14 +66,14 @@ public class ArrayList implements List {
     @Override
     public Object get(int i) {
         // TODO implement.
-        return (i > values.length) ? null : values[i];
+        return (i >= values.length) ? null : values[i];
     }
 
     /** {@inheritDoc} */
     @Override
     public Object remove(int i) {
         // TODO implement.
-        if (i > values.length)
+        if (i >= values.length)
             return null;
 
         Object result = values[i];
