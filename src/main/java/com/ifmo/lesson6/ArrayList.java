@@ -51,6 +51,7 @@ public class ArrayList implements List {
                 if (values[i] == null) {
                     values[i] = val;
                     out = true;
+                    break;
                 }
             }
 
