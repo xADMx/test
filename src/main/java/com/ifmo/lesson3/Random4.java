@@ -22,8 +22,8 @@ public class Random4 {
         // TODO implement
         Random rnd = new Random();
 
-        int[] arr = new int[4];
-        for (int i = 0; i < 4; i++) {
+        int[] arr = new int[5];
+        for (int i = 0; i < 3; i++) {
             arr[i] = rnd.nextInt(100) + 10;
         }
         return arr;
@@ -32,7 +32,7 @@ public class Random4 {
     public static boolean isIncreasingSequence(int[] randomNumbers) {
         // TODO implement
         for (int i = 0; i < randomNumbers.length; i++) {
-            if (randomNumbers.length >= i + 1 && randomNumbers[i] > randomNumbers[i + 1]) {
+            if (randomNumbers.length > i + 1 && randomNumbers[i] > randomNumbers[i + 1]) {
                 return false;
             }
         }

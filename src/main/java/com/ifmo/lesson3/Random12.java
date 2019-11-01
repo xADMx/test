@@ -12,7 +12,6 @@ public class Random12 {
         int[] randomNumbers = randomNumbers();
 
         // TODO implement
-
         int max = max(randomNumbers);
         int maxLastIndex = lastIndexOf(randomNumbers, max);
 
@@ -32,6 +31,9 @@ public class Random12 {
 
     public static int max(int[] randomNumbers) {
         // TODO implement
+        if(randomNumbers.length < 1)
+            return 0;
+
         int max = randomNumbers[0];
         for (int i = 1; i < randomNumbers.length; i++) {
             if (max < randomNumbers[i]) {
