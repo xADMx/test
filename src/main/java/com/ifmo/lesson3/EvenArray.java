@@ -15,10 +15,10 @@ public class EvenArray {
 
     public static int[] evenArray() {
         // TODO implement
-        int[] arr = new int[9];
+        int[] arr = new int[10];
         int index = 0;
 
-        for (int i = 2; i < 20; i++) {
+        for (int i = 2; i < 21; i++) {
             if (i % 2 == 0) {
                 arr[index] = i;
                 index++;

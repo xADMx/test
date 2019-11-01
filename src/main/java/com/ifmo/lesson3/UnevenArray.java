@@ -41,13 +41,18 @@ public class UnevenArray {
             }
         }
 
-        System.out.println(Arrays.toString(arr));
+       // System.out.println(Arrays.toString(arr));
+        for (int i = 0; i < arr.length ; i++) {
+            System.out.print(arr[i] + " ");
+        }
 
         for (int i = 0; i < arr.length; i++) {
             arrRev[i] = arr[(arr.length - 1) - i];
         }
-        System.out.println(Arrays.toString(arrRev));
-
+       // System.out.println(Arrays.toString(arrRev));
+        for (int i = 0; i < arrRev.length ; i++) {
+            System.out.print(arrRev[i] + " ");
+        }
         return arrRev;
     }
 }
