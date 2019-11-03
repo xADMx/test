@@ -23,16 +23,16 @@ public class Random8 {
     public static int[] randomNumbers() {
         Random rnd = new Random();
 
-        int[] arr = new int[10];
-        for (int i = 0; i < 10; i++) {
-            arr[i] = rnd.nextInt(11) + 1;
+        int[] arr = new int[8];
+        for (int i = 0; i < 8; i++) {
+            arr[i] = rnd.nextInt(10) + 1;
         }
         return arr;
     }
 
     public static int[] replaceWithZeros(int[] randomNumbers) {
         // TODO implement
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < randomNumbers.length; i++) {
             if (i % 2 == 0)
                 randomNumbers[i] = 0;
         }

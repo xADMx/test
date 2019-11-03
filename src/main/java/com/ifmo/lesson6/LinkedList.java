@@ -31,6 +31,9 @@ public class LinkedList implements List, Stack, Queue {
     @Override
     public Object take() {
         // TODO implement.
+        if(head == null)
+            return null;
+
         Object res = head.value;
         head = head.next;
         return res;
@@ -49,6 +52,9 @@ public class LinkedList implements List, Stack, Queue {
     @Override
     public Object remove(int i) {
         // TODO implement.
+        if(head == null)
+            return null;
+
         if(i == 0){
             Object res = head.value;
             head = head.next;
@@ -86,6 +92,9 @@ public class LinkedList implements List, Stack, Queue {
     @Override
     public Object pop() {
         // TODO implement.
+        if(head == null)
+            return null;
+
         Object res = head.value;
         head = head.next;
         return res;

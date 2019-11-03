@@ -22,8 +22,8 @@ public class Random4 {
         // TODO implement
         Random rnd = new Random();
 
-        int[] arr = new int[5];
-        for (int i = 0; i < 3; i++) {
+        int[] arr = new int[4];
+        for (int i = 0; i < 4; i++) {
             arr[i] = rnd.nextInt(100) + 10;
         }
         return arr;
