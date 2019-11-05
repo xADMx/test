@@ -79,9 +79,9 @@ public class LinkedList<T> implements List<T>, Stack<T>, Queue<T> {
 
     /** {@inheritDoc} */
     @Override
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         // TODO implement.
-        return new LinkedListIterator<T>(head);
+        return new LinkedListIterator<>(head);
     }
 
     /** {@inheritDoc} */

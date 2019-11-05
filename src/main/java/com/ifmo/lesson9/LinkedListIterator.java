@@ -2,7 +2,7 @@ package com.ifmo.lesson9;
 
 import java.util.Iterator;
 
-public class LinkedListIterator<T> implements Iterator {
+public class LinkedListIterator<T> implements Iterator<T> {
 
     private Item<T> head;
 
