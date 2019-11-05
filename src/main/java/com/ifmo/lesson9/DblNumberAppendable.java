@@ -24,8 +24,8 @@ public class DblNumberAppendable extends AbstractNumberAppendable<Double> {
         if(iter.hasNext())
             res = iter.next();
 
-        for (Object item : list) {
-            res += op.operation(res, (Double) item);
+        for (Iterator<Double> it = iter; it.hasNext(); ) {
+            res += op.operation(res, it.next());
         }
         return res;
     }

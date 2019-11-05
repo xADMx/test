@@ -24,8 +24,8 @@ public class IntNumberAppendable extends AbstractNumberAppendable<Integer> {
         if(iter.hasNext())
             res = iter.next();
 
-        for (Object item : list) {
-            res += op.operation(res, (Integer) item);
+        for (Iterator<Integer> it = iter; it.hasNext(); ) {
+            res += op.operation(res, it.next());
         }
         return res;
     }
