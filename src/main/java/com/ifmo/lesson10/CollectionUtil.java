@@ -25,7 +25,7 @@ public class CollectionUtil {
                         tempIterator = temp[index++].iterator();
 
                     if(tempIterator.hasNext()){
-                        return  true;
+                        return true;
                     } else {
                         if(temp.length == index){
                             return false;
