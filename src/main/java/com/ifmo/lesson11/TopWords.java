@@ -1,0 +1,125 @@
+package com.ifmo.lesson11;
+
+import javafx.util.Pair;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class TopWords {
+    public static void main(String[] args) throws IOException {
+        // Создаем файл, указывая путь к текстовому файлу на диске
+        File text = new File("C:\\Users\\ADMnet\\IdeaProjects\\test\\src\\resources\\wap.txt");
+
+        // Вычитываем все строки из файла
+        List<String> lines = Files.readAllLines(text.toPath());
+
+        // Создаем пустую коллекцию для слов.
+        List<String> words = new ArrayList<>();
+
+        for (String line : lines) {
+            // Для каждой строки
+            String[] wordSplit =
+                    line.toLowerCase() // Переводим в нижний регистр
+                            .replaceAll("\\p{Punct}", " ") // Заменяем все знаки на пробел
+                            .trim() // Убираем пробелы в начале и конце строки.
+                            .split("\\s"); // Разбиваем строки на слова
+
+            for (String s : wordSplit) {
+                // Выбираем только непустые слова.
+                if (s.length() > 0)
+                    words.add(s.trim());
+            }
+        }
+
+        System.out.println(top10Words(words));
+        System.out.println(top10Phrases(words));
+        System.out.println(charactersFrequency(words));
+    }
+
+    private static class MyHash{
+        private final String word;
+        private Integer count;
+
+        public MyHash(String word, Integer count) {
+            this.word = word;
+            this.count = count;
+        }
+
+        public MyHash(String word) {
+            this.word = word;
+            this.count = 1;
+        }
+
+        public String getWord() {
+            return word;
+        }
+
+        public void deincrement(){
+            this.count--;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            MyHash myHash = (MyHash) o;
+            return Objects.equals(word, myHash.word);
+        }
+
+        @Override
+        public int hashCode() {
+            return count;
+        }
+    }
+
+    public static Map<String, Integer> top10Words(List<String> words) {
+        // todo implement
+        Map<String, Integer> temp = new HashMap<>();
+        Map<String, Integer> res = new HashMap<>();
+        Set<MyHash> t = new TreeSet<MyHash>((h1, h2) -> h1.word.compareTo(h2.word));
+        for(String word : words){
+            /*MyHash hash = new MyHash(word);
+            MyHash find = temp.remove(hash);*/
+            if(temp.containsKey(word)) {
+                temp.replace(word, temp.get(word) + 1);
+            } else {
+                temp.put(word, 1);
+            }
+        }
+
+
+        /*List<Map.Entry<String, Integer>> entries = temp.entrySet().stream().map((e1, e2) -> new MyHash(e1.getKey(), e1.getValue())).collect(Collectors.toList());
+        entries.sort();
+        int count = 0;
+        for (MyHash h : t) {
+            res.put(h.word, h.count);
+            count++;
+
+            if(count == 6)
+                break;
+        }
+
+
+
+       /* List<Map.Entry<String, Integer>> res = new ArrayList<>(new Comparable<Map.Entry<String, Integer>>({
+
+        }));
+
+        res = temp.entrySet().stream().collect(Collectors.toList());
+*/
+        return res;
+    }
+
+    public static Map<String, Integer> top10Phrases(List<String> words) {
+        // todo implement
+        return Map.of();
+    }
+
+    public static Map<Character, Integer> charactersFrequency(List<String> words) {
+        // todo implement
+        return Map.of();
+    }
+}
