@@ -1,12 +1,10 @@
 package com.ifmo.lesson11;
 
-import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TopWords {
     public static void main(String[] args) throws IOException {
