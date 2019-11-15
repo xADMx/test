@@ -14,7 +14,7 @@ public class Random12 {
         // TODO implement
         int max = max(randomNumbers);
         int maxLastIndex = lastIndexOf(randomNumbers, max);
-
+        System.out.println(maxLastIndex);
         // TODO implement
     }
 

@@ -17,6 +17,8 @@ public class LinkedListIterator implements Iterator {
 
     @Override
     public Object next() {
+        if(head == null)
+            return null;
         Object res = head.value;
         head = head.next;
         return res;
