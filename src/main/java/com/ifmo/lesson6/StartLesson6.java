@@ -3,7 +3,7 @@ package com.ifmo.lesson6;
 public class StartLesson6 {
 
     public static void main(String[] args){
-        ArrayList list = new ArrayList();
+        LinkedList list = new LinkedList();
         list.add("0");
         list.add("1");
         list.add("3");
