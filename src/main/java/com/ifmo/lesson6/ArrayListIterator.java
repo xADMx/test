@@ -18,6 +18,6 @@ public class ArrayListIterator implements Iterator {
 
     @Override
     public Object next() {
-        return (values.length > index) ? null : values[index++];
+        return hasNext() ? null : values[index++];
     }
 }
