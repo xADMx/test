@@ -55,6 +55,6 @@ public class UnevenArray {
         for (int i = 0; i < arrRev.length ; i++) {
             System.out.print(arrRev[i] + " ");
         }
-        return arrRev;
+        return arr;
     }
 }

@@ -75,39 +75,32 @@ public class TopWords {
 
     public static Map<String, Integer> top10Words(List<String> words) {
         // todo implement
-        Map<String, Integer> temp = new HashMap<>();
+        Map<String, Integer> tempMap = new HashMap<>();
         Map<String, Integer> res = new HashMap<>();
-        Set<MyHash> t = new TreeSet<MyHash>((h1, h2) -> h1.word.compareTo(h2.word));
+
         for(String word : words){
-            /*MyHash hash = new MyHash(word);
-            MyHash find = temp.remove(hash);*/
-            if(temp.containsKey(word)) {
-                temp.replace(word, temp.get(word) + 1);
+            if(tempMap.containsKey(word)) {
+                tempMap.replace(word, tempMap.get(word) + 1);
             } else {
-                temp.put(word, 1);
+                tempMap.put(word, 1);
             }
         }
 
+        for (int i = 0; i < 10; i++) {
+            Map.Entry<String, Integer> max = null;
+            for (Map.Entry<String, Integer> temp : tempMap.entrySet()){
+                if(max == null) {
+                    max = temp;
+                } else if (max.getValue() < temp.getValue()) {
+                    max = temp;
+                }
+            }
 
-        /*List<Map.Entry<String, Integer>> entries = temp.entrySet().stream().map((e1, e2) -> new MyHash(e1.getKey(), e1.getValue())).collect(Collectors.toList());
-        entries.sort();
-        int count = 0;
-        for (MyHash h : t) {
-            res.put(h.word, h.count);
-            count++;
+            tempMap.remove(max.getKey());
+            res.put(max.getKey(), max.getValue());
 
-            if(count == 6)
-                break;
         }
 
-
-
-       /* List<Map.Entry<String, Integer>> res = new ArrayList<>(new Comparable<Map.Entry<String, Integer>>({
-
-        }));
-
-        res = temp.entrySet().stream().collect(Collectors.toList());
-*/
         return res;
     }
 
