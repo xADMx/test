@@ -12,12 +12,12 @@ public class LinkedListIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return (head == null) ? false : true;
+        return (head != null) ? true : false;
     }
 
     @Override
     public Object next() {
-        if(hasNext())
+        if(!hasNext())
             return null;
         Object res = head.value;
         head = head.next;
