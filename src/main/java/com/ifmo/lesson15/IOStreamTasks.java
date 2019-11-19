@@ -9,10 +9,11 @@ import java.util.List;
  */
 public class IOStreamTasks {
     public static void main(String[] args) throws IOException{
-        File text = new File("C:\\Users\\ADMnet\\IdeaProjects\\test\\src\\resources\\wap.txt");
-        File textCopy = new File("C:\\Users\\ADMnet\\IdeaProjects\\test\\src\\resources\\wap_copy.txt");
-        File textDe = new File("C:\\Users\\ADMnet\\IdeaProjects\\test\\src\\resources\\wap_copyDe.txt");
-        File dirCopy = new File("C:\\Users\\ADMnet\\IdeaProjects\\test\\src\\resources\\");
+        File text = new File("C:\\Users\\kozlo\\IdeaProjects\\test\\src\\resources\\wap.txt");
+        File textCopy = new File("C:\\Users\\kozlo\\IdeaProjects\\test\\src\\resources\\wap_copy.txt");
+        File textDe = new File("C:\\Users\\kozlo\\IdeaProjects\\test\\src\\resources\\wap_copyDe.txt");
+        File textKey = new File("C:\\Users\\kozlo\\IdeaProjects\\test\\src\\resources\\key.txt");
+        File dirCopy = new File("C:\\Users\\kozlo\\IdeaProjects\\test\\src\\resources\\");
 //        try(InputStream in = new FileInputStream(text);
 //            OutputStream out = new FileOutputStream(textCopy);){
 //            copy(in, out);
@@ -20,15 +21,17 @@ public class IOStreamTasks {
 //        split(text, dirCopy, 1440 * 1024);
 
 //assembly(split(text, dirCopy, 1440 * 1024), textCopy);
-        try(InputStream in = new FileInputStream(text);
-            OutputStream out = new FileOutputStream(textCopy);){
-            encrypt(in, out, "key");
-        }
-        try(InputStream in = new FileInputStream(textCopy);
-            OutputStream out = new FileOutputStream(textDe);){
-            encrypt(in, out, "key");
-        }
+//        try(InputStream in = new FileInputStream(text);
+//            OutputStream out = new FileOutputStream(textCopy);){
+//            encrypt(in, out, "key");
+//        }
+//        try(InputStream in = new FileInputStream(textCopy);
+//            OutputStream out = new FileOutputStream(textDe);){
+//            encrypt(in, out, "key");
+//        }
 
+        encrypt(text,textCopy, textKey);
+        encrypt(textCopy,textDe, textKey);
     }
 
     /**
@@ -123,12 +126,16 @@ public class IOStreamTasks {
 
             int len = 0;
             int index = 0;
-            //byte[] buf = new byte[1024];
-            while ((len = src.read()) > 0) {
-                    dst.write(len ^ passphrase.charAt(index));
+            byte[] buf = new byte[1024];
+            while ((len = src.read(buf)) > 0) {
+                for (int i = 0; i < buf.length ; i++) {
+                    buf[i] = (byte) (buf[i] ^ passphrase.charAt(index++));
                     if(index == passphrase.length()){
                         index = 0;
                     }
+                }
+
+                dst.write(buf, 0, len);
             }
     }
 
@@ -141,6 +148,32 @@ public class IOStreamTasks {
      * @throws IOException Будет выброшен в случае ошибки.
      */
     public static void encrypt(File src, File dst, File key) throws IOException {
+        try(InputStream in = new FileInputStream(src);
+            OutputStream out = new FileOutputStream(dst);
+            ){
+            InputStream keyIN = new FileInputStream(key);
+            int len = 0;
+            int index = 0;
+            byte[] buf = new byte[1024];
+            while ((len = in.read(buf)) > 0) {
 
+
+                for (int i = 0; i < buf.length ; i++) {
+
+                    int keyInt = keyIN.read();
+
+                    if(keyInt == -1){
+                        keyIN.close();
+                        keyIN = new FileInputStream(key);
+                        keyInt = keyIN.read();
+                    }
+
+                    buf[i] = (byte) (buf[i] ^ keyInt);
+                }
+
+                out.write(buf, 0, len);
+            }
+
+        }
     }
 }
