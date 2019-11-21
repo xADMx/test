@@ -13,7 +13,7 @@ public class ArrayListIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return (values[index] != null & values.length > index) ? true : false;
+        return ( values.length > index && values[index] != null) ? true : false;
     }
 
     @Override
