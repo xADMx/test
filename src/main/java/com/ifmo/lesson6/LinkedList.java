@@ -63,7 +63,7 @@ public class LinkedList implements List, Stack, Queue {
 
         Item obj = this.find(i - 1);
 
-        if (obj != null) {
+        if (obj != null && obj.next != null) {
             Object res = obj.next.value;
             obj.next = obj.next.next;
             return res;

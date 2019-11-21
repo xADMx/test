@@ -49,7 +49,7 @@ public class PrintClient {
                     break;
                 case "/ping":
                     try {
-                        sendEchoMessage(msg);
+                        sendEchoMessage(msg, 5);
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -146,22 +146,28 @@ public class PrintClient {
         }
     }
 
-    private void sendEchoMessage(String msg) throws IOException, ClassNotFoundException {
+    private void sendEchoMessage(String msg, int count) throws IOException, ClassNotFoundException {
         System.out.printf("Обмен пакетами с %s:\n", serverAddr);
-        for (int i = 0; i < 5; i++) {
+        long sum = 0;
+        String senderAddr = "";
+        for (int i = 0; i < count; i++) {
             try (Socket sock = new Socket()) {
                 sock.connect(serverAddr);
                 try (ObjectOutputStream objOut = new ObjectOutputStream(sock.getOutputStream())) {
-                    String senderAddr = sock.getInetAddress().getHostAddress();
+                    senderAddr = sock.getInetAddress().getHostAddress();
                     objOut.writeObject(new Message(System.currentTimeMillis(), name, msg));
                     objOut.flush();
 
                     ObjectInputStream objIn = new ObjectInputStream(sock.getInputStream());
                     Message resMsg = (Message) objIn.readObject();
-                    System.out.printf("Ответ от %s: время=%sмс \n", senderAddr, Math.abs(System.currentTimeMillis() - resMsg.getTimestamp()), resMsg.getText());
+                    sum =Math.abs(System.currentTimeMillis() - resMsg.getTimestamp());
+                    System.out.printf("Ответ от %s: время=%sмс \n", senderAddr, Math.abs(System.currentTimeMillis() - resMsg.getTimestamp()));
                 }
             }
         }
+
+        System.out.printf("Ср. время ответа от %s: время=%sмс \n", senderAddr, (int) sum / count);
+
     }
 
     private static SocketAddress parseAddress(String addr) {

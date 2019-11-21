@@ -10,6 +10,9 @@ public class Message implements Serializable {
 
     private String text;
 
+    private boolean err;
+    private String errMsg;
+
     public Message(long timestamp, String sender, String text) {
         this.timestamp = timestamp;
         this.sender = sender;
