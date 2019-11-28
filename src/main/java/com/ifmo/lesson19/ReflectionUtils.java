@@ -35,10 +35,6 @@ public class ReflectionUtils {
             } else {
                 sb.append(toString(field.get(obj))).append("\n");
             }
-
-            if (field.getModifiers() == 2){
-                field.setAccessible(false);
-            }
         }
 
         return sb.append("}").toString();
