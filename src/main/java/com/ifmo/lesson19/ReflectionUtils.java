@@ -30,8 +30,9 @@ public class ReflectionUtils {
                 field.setAccessible(true);
             }
 
-            if(field.getType().isPrimitive()){
-                sb.append(" ").append(field.getName()).append("=").append(field.get(obj).toString()).append(";\n");
+            if(!field.isAnnotationPresent(Exclude.class))
+            if(field.getType().isPrimitive() || field.getType() == String.class){
+                    sb.append(" ").append(field.getName()).append("=").append(field.get(obj).toString()).append(";\n");
             } else {
                 sb.append(toString(field.get(obj))).append("\n");
             }
