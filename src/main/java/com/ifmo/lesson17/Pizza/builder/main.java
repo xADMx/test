@@ -1,4 +1,4 @@
-package com.ifmo.lesson17.Pizza;
+package com.ifmo.lesson17.Pizza.builder;
 
 public class main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.ifmo.lesson17.car;
+package com.ifmo.lesson17.car.factory;
 
 public class main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.ifmo.lesson17.car;
+package com.ifmo.lesson17.car.factory;
 
 public class RUSFactory extends AFactory {
     @Override
