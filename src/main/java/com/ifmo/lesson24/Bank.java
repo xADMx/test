@@ -31,11 +31,16 @@ public class Bank {
         private final long id;
         private final long userId;
         private long amount;
+        private Lock lock = new ReentrantLock();
 
         private Account(long id, long userId, long amount) {
             this.id = id;
             this.userId = userId;
             this.amount = amount;
+        }
+
+        public Lock getLock() {
+            return lock;
         }
     }
 
@@ -123,22 +128,18 @@ public class Bank {
     // TODO Самая главная часть работы!
     public void transferMoney(Account from, Account to, long amount) {
         boolean result = false;
-        Object obj = null;
-        if(!await.containsKey(from.id + " " + to.id)){
-            obj = new Object();
-            await.put(from.id + " " + to.id, obj);
-        } else {
-            obj = await.get(from.id + " " + to.id);
-        }
 
-            synchronized (obj){
-                if(from.amount - amount > 0) {
-                    to.amount += amount;
-                    result = true;
-                }
+        from.getLock().lock();
+        to.getLock().lock();
+        try {
+            if (from.amount - amount > 0) {
+                to.amount += amount;
+                result = true;
             }
-
-        await.remove(from.id + " " + to.id);
+        } finally {
+            from.getLock().unlock();
+            to.getLock().unlock();
+        }
 
         log.add(new Transaction(from.id, to.id, amount, result));
 
