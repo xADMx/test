@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 public class Bank {
     private Map<Long, User> users = new ConcurrentHashMap<>();
+    private Map<String, Object> await = new ConcurrentHashMap<>();
     private List<Account> accounts = new CopyOnWriteArrayList<>();
     public static final BlockingQueue<Transaction> log = new LinkedBlockingDeque<>();
 
@@ -63,12 +66,14 @@ public class Bank {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // 1. Сгенерируйте пользователей и их аккаунты (все идентификаторы должны быть уникальны).
         // 2. Переводите деньги со случайного аккаунта на случайный в 100 потоках.
         // Другими словами, создайте 100 потоков или пул из 100 потоков, в которых
         // выполните перевод вызовом метода transferMoney().
 
+        Thread thrLog = new Thread(new ViewLog());
+        thrLog.start();
         Bank bank = new Bank();
 
         bank.generatePeople(10);
@@ -83,6 +88,8 @@ public class Bank {
         }
 
 
+        es.shutdown();
+//        thrLog.interrupt();
     }
 
     public Map<Long, User> getUsers() {
@@ -91,12 +98,6 @@ public class Bank {
 
     public List<Account> getAccounts() {
         return accounts;
-    }
-
-    public void startLog(){
-        Thread t = new Thread(new ViewLog());
-        t.setDaemon(true);
-        t.start();
     }
 
      public void generatePeople(int number) {
@@ -122,15 +123,22 @@ public class Bank {
     // TODO Самая главная часть работы!
     public void transferMoney(Account from, Account to, long amount) {
         boolean result = false;
+        Object obj = null;
+        if(!await.containsKey(from.id + " " + to.id)){
+            obj = new Object();
+            await.put(from.id + " " + to.id, obj);
+        } else {
+            obj = await.get(from.id + " " + to.id);
+        }
 
-        synchronized (from){
-            synchronized (to){
+            synchronized (obj){
                 if(from.amount - amount > 0) {
                     to.amount += amount;
                     result = true;
                 }
             }
-        }
+
+        await.remove(from.id + " " + to.id);
 
         log.add(new Transaction(from.id, to.id, amount, result));
 
@@ -143,15 +151,19 @@ public class Bank {
 
         @Override
         public void run() {
-
-            while (Thread.currentThread().isInterrupted()){
+            int count = 1;
+            boolean exit = false;
+            while (!Thread.currentThread().isInterrupted()){
                 try {
                     System.out.println(log.take().toString());
+                    count++;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     Thread.currentThread().interrupt();
                 }
+                System.out.println(count);
             }
+
 
 
         }
