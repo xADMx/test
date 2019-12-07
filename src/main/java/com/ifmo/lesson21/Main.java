@@ -29,7 +29,7 @@ public class Main {
         int count = 0;
         for (String line : lines) {
             // Для каждой строки
-            param.get(count).add(line);
+            param.get(count++).add(line);
 
             if(count == 3){
                 count = 0;
@@ -88,7 +88,7 @@ public class Main {
                 for(String s : wordSplit)
                 if (s.length() > 0)
                     if(tempMap.containsKey(s)) {
-                        tempMap.replace(s, tempMap.get(s) + 1);
+                        tempMap.merge(s, 1, (i1, i2) -> i1 + i2);
                     } else {
                         tempMap.put(s, 1);
                     }
@@ -97,7 +97,7 @@ public class Main {
             synchronized (monitor){
                     for(Map.Entry<String, Integer> map : tempMap.entrySet()){
                         if(words.containsKey(map.getKey())) {
-                            words.replace(map.getKey(), words.get(map.getKey()) + map.getValue());
+                            words.merge(map.getKey(), map.getValue(), (i1, i2) -> i1 + i2);
                         } else {
                             words.put(map.getKey(), map.getValue());
                         }
