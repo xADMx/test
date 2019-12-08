@@ -89,7 +89,7 @@ public class Bank {
             es.submit(() -> bank.transferMoney(
                     bank.getAccounts().get(rnd.nextInt(bank.getAccounts().size())),
                             bank.getAccounts().get(rnd.nextInt(bank.getAccounts().size())),
-                            rnd.nextInt(10000) +8));
+                            rnd.nextInt(10000) +400));
         }
 
 
