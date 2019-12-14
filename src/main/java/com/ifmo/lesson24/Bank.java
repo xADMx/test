@@ -134,6 +134,7 @@ public class Bank {
         try {
             if (from.amount - amount > 0) {
                 to.amount += amount;
+                from.amount -= amount;
                 result = true;
             }
         } finally {
