@@ -66,7 +66,7 @@ public class ArrayList implements List {
     @Override
     public Object get(int i) {
         // TODO implement.
-        return (i >= values.length) ? null : values[i];
+        return (i < 0 || i >= values.length) ? null : values[i];
     }
 
     /** {@inheritDoc} */
