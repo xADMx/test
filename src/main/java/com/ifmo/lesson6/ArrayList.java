@@ -73,7 +73,7 @@ public class ArrayList implements List {
     @Override
     public Object remove(int i) {
         // TODO implement.
-        if (i >= values.length)
+        if (i < 0 || i >= values.length)
             return null;
 
         Object result = values[i];
