@@ -34,11 +34,14 @@ public class IOStreamTasks {
 //        encrypt(text, textCopy, textKey);
 //        encrypt(textCopy, textDe, textKey);
 
-        InputStream in = new RandomInputStream(new Random(), 30);
+        InputStream in = new RandomInputStream(new Random(), 1024);
         int len = 0;
+        int count = 0;
         while ((len = in.read()) != -1) {
             System.out.println(len);
+            count++;
         }
+        System.out.println(count);
     }
 
     /**

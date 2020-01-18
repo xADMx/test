@@ -1,5 +1,7 @@
 package com.ifmo.lesson6;
 
+import java.util.Iterator;
+
 public class StartLesson6 {
 
     public static void main(String[] args){
@@ -9,8 +11,10 @@ public class StartLesson6 {
         list.add(2);
         list.add(3);
 //        list.remove(3);
-        for (Object obj : list) {
-            System.out.println("Сумма: " + obj);
+
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("Сумма: " + iterator.next());
         }
 
     }
