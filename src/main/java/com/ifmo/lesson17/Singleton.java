@@ -3,7 +3,7 @@ package com.ifmo.lesson17;
 
 public class Singleton {
 
-    public static final Singleton SG = new Singleton();
+    private static final Singleton SG = new Singleton();
 
     private Singleton() {
 
